@@ -1,0 +1,32 @@
+Инкримент 2
+
+LRESULT CALLBACK WndProc(HWND hwnd, UINT utype, WPARAM wparam, LPARAM lparam)
+{
+    HDC hdc,hCompatibleDC;
+    PAINTSTRUCT ps;
+    HANDLE hbitmap,holdbitmap;
+    RECT rect;
+    BITMAP bitmap;
+ 
+    switch(utype)
+    {
+        case WM_PAINT:
+            hdc = BeginPaint(hwnd,&ps);
+            hbitmap = LoadImage(NULL,L"E:\\bitmap.bmp",IMAGE_BITMAP,0,0,LR_LOADFROMFILE);
+            GetObject(hbitmap,sizeof(BITMAP),&bitmap);
+            hCompatibleDC = CreateCompatibleDC(hdc);
+            holdbitmap = SelectObject(hCompatibleDC,hbitmap);
+            GetClientRect(hwnd,&rect);
+            StretchBlt(hdc,0,0,rect.right,rect.bottom,hCompatibleDC,0,0,bitmap.bmWidth,bitmap.bmHeight,SRCCOPY);
+            SelectObject(hCompatibleDC,holdbitmap);
+            DeleteObject(hbitmap);
+            DeleteDC(hCompatibleDC);
+            EndPaint(hwnd,&ps);
+            return 0;
+        case WM_DESTROY:
+            PostQuitMessage(0);
+            return 0;
+    }
+    return DefWindowProc(hwnd,utype,wparam,lparam);
+}
+
