@@ -1,0 +1,11 @@
+void MainWindow::openImage(const QString & path){
+	imgPath=path;
+	if (imgPath.isNull()){
+		imgPath=QFileDialog::getOpenFileName(this,"Open Image"," ","Image Files(*.png *.jpg *.bmp) ");}
+	if (!imgPath.isEmpty()){
+		if (!pixmap.load(imgPath)){
+			QMessageBox::warning(this,"Open Image","The img file could not be loaded.", QMessageBox::Cancel);
+	return;}}
+	textLabel->setText(imgPath);
+}
+
