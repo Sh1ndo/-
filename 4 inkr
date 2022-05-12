@@ -1,0 +1,4 @@
+void MainWindow::openButtonClick(){
+	imgPath = textLabel->text();
+	openImage();
+	update();}
