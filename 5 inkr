@@ -1,0 +1,42 @@
+#include <QGroupBox>
+#include <QListWidget>
+#include <QTextBrowser>
+#include <QListWidgetItem>
+
+QWidget *www = new QWidget;
+QGroupBox*    _groupBox = new QGroupBox();
+_groupBox->setTitle("Config Help System");
+QVBoxLayout *_verticalLayout = new QVBoxLayout(_groupBox);
+www->setLayout(_verticalLayout);
+QSplitter *_splitter = new QSplitter(_groupBox);
+_splitter->setOrientation(Qt::Horizontal);
+
+QListWidget *_list = new QListWidget(_splitter);
+QListWidgetItem *item1 = new QListWidgetItem;
+item1->setText("About Config Tool");
+_list->insertItem(0, item1);
+QListWidgetItem *item2 = new QListWidgetItem;
+item2->setText("Configuration Help");
+_list->insertItem(1, item2);
+_list->setSelectionMode(QAbstractItemView::SingleSelection);
+_splitter->addWidget(_list);
+
+QTextBrowser *_helpBrowser = new QTextBrowser(_splitter);
+QPushButton* _homeButton = new QPushButton("home");
+QPushButton* _backButton = new QPushButton("back");
+QPushButton *_closeButton = new QPushButton("close");
+
+QHBoxLayout *buttonLayout = new QHBoxLayout(this);
+buttonLayout->addWidget(_closeButton);
+buttonLayout->addStretch(1);
+buttonLayout->addWidget(_homeButton);
+buttonLayout->addWidget(_backButton);
+_splitter->setStretchFactor(1,1);
+
+_verticalLayout->addWidget(_splitter);
+
+_verticalLayout->addLayout(buttonLayout);
+
+www->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+www->resize(1000,600);
+www->show();
