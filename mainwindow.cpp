@@ -1,9 +1,6 @@
 #include <mainwindow.h>
 #include <QtWidgets>
  
-#include <mainwindow.h>
-#include <QtWidgets>
- 
 MainWindow::MainWindow(){
 	resize(630,300);
 	setWindowTitle("gallery");
